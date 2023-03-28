@@ -1,6 +1,27 @@
+import { FacebookAuthProvider, signInWithPopup } from "firebase/auth";
 import React from "react";
+import {auth} from '../config/firebaseConfig'
+import { useNavigate } from "react-router-dom";
+import {errorToast, successToast} from '../config/toastConfig';
 
 const LoginPage = () => {
+
+    const navigate = useNavigate();
+    const signInWithFB = () => {
+        const provider = new FacebookAuthProvider();
+        signInWithPopup(auth, provider)
+        .then(res => {
+            console.log(res);
+            navigate("/");
+            successToast(`Welcome ${res.user.displayName}`);
+        })
+        .catch(err => {
+            console.log(err.message);
+            errorToast('Đăng nhập thất bại');
+        })
+    }
+
+    
   return (
     <div className="bg-login-box">
       <div className="login-box">
@@ -8,7 +29,7 @@ const LoginPage = () => {
         <button
           className="social-button"
           id="facebook-connect"
-        //   onClick={signInWithFacebook}
+          onClick={signInWithFB}
         >
           {" "}
           <span>Connect with Facebook</span>

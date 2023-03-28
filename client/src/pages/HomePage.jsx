@@ -1,8 +1,10 @@
-import React from 'react'
+import React, { useContext } from 'react'
+import { AuthContext } from '../context/AuthContext'
 
 const HomePage = () => {
+    const {currentUser} = useContext(AuthContext);
   return (
-    <div>HomePage</div>
+    <div>Hi there, Bạn là <b>{currentUser.displayName}</b> và vừa đăng nhập từ Facebook...</div> 
   )
 }
 
