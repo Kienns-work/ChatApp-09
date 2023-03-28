@@ -1,4 +1,4 @@
-import { FacebookAuthProvider, signInWithPopup } from "firebase/auth";
+import { FacebookAuthProvider, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import React from "react";
 import {auth} from '../config/firebaseConfig'
 import { useNavigate } from "react-router-dom";
@@ -20,6 +20,19 @@ const LoginPage = () => {
             errorToast('Đăng nhập thất bại');
         })
     }
+    const signInWithGoogle = () => {
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth, provider)
+      .then(res => {
+          console.log(res);
+          navigate("/");
+          successToast(`Welcome ${res.user.displayName}`);
+      })
+      .catch(err => {
+          console.log(err.message);
+          errorToast('Đăng nhập thất bại');
+      })
+  }
 
     
   return (
@@ -38,7 +51,7 @@ const LoginPage = () => {
           
           className="social-button"
           id="google-connect"
-        //   onClick={signInWithGoogle}
+          onClick={signInWithGoogle}
         >
           {" "}
           <span>Connect with Google</span>
