@@ -1,9 +1,10 @@
-import LoginPage from "./pages/LoginPage";
+import LoginPage from "./pages/Auth/LoginPage";
 import "./styles.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
+import Register from "./pages/Auth/Register";
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path="/">
           <Route index element={<CheckUserExist><HomePage /></CheckUserExist>} />
           <Route path="login" element={<LoginPage />} />
+          <Route path="register" element={<Register />}></Route>
         </Route>
       </Routes>
     </BrowserRouter>
