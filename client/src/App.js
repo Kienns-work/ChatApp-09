@@ -1,5 +1,5 @@
 import LoginPage from "./pages/Auth/LoginPage";
-import "./styles.scss";
+import "./styles/styles.scss";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import { useContext } from "react";
@@ -11,7 +11,7 @@ function App() {
   const { currentUser } = useContext(AuthContext);
 
   const CheckUserExist = ({ children }) => {
-    if (!currentUser) {return <Navigate to="/login" />};
+    if (!currentUser) { return <Navigate to="/login" /> };
     return children;
   };
 
