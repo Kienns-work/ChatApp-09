@@ -1,16 +1,16 @@
 import {
   FacebookAuthProvider,
-  GithubAuthProvider,
   GoogleAuthProvider,
   signInWithPopup,
+  signInWithEmailAndPassword
 } from "firebase/auth";
 import React from "react";
 import {Link} from "react-router-dom";
 import { auth } from "../../config/firebaseConfig";
 import { useNavigate } from "react-router-dom";
 import { errorToast, successToast } from "../../config/toastConfig";
-import { IMAGES } from "../../constants/ImageConstants";
 import { getImagePath } from "../../utils/GetImagePath";
+
 
 const fbIcon = getImagePath('fbIcon');
 const ggIcon = getImagePath('ggIcon');
@@ -43,30 +43,34 @@ const LoginPage = () => {
         errorToast("Đăng nhập thất bại");
       });
   };
-  const signInWithGithub = () => {
-    const provider = new GithubAuthProvider();
-    signInWithPopup(auth, provider)
-      .then((res) => {
-        console.log(res);
-        navigate("/");
-        successToast(`Welcome ${res.user.displayName}`);
-      })
-      .catch((err) => {
-        console.log(err.message);
-        errorToast("Đăng nhập thất bại");
-      });
-  };
+  
+  const handleOnSubmit = async (e) => {
+    e.preventDefault();
+    const email = e.target[1].value;
+    const password = e.target[2].value;
+    console.log("Đăng nhập");
+    await signInWithEmailAndPassword(auth, email, password)
+    .then((userCredential) => {
+      // Signed in 
+      const user = userCredential.user;
+      console.log(user);
+    })
+    .catch((error) => {
+      const errorCode = error.code;
+      const errorMessage = error.message;
+      console.log(errorCode, errorMessage);
+    });
+  
+  
 
-  const signInWithPhoneNumber = () => {
-    document.querySelector("#phone-connect").classNameNameList.add("hide");
-  };
+  }
 
   return (
     <section className="container forms">
             <div className="form login">
                 <div className="form-content">
                     <header>Login</header>
-                    <form action="#">
+                    <form onSubmit={handleOnSubmit}>
                         <div className="field input-field">
                             <input type="email" placeholder="Email" className="input" />
                         </div>

@@ -1,17 +1,20 @@
-import React from "react";
-
+import React, {useContext} from "react";
+import { AuthContext } from '../../context/AuthContext';
 
 
 const ChatPage = () => {
-
+    const { currentUser } = useContext(AuthContext);
+    
     return (
         <>
             <div className="chatpage-container col l-8 m-8 c-8">
                 <div className="chatpage-header">
                     <div className="header-left">
                         <div className="info-user">
-                            <div className="chatpage-avatar"></div>
-                            <span className="chatpage-name">Đặng Đình Huy</span>
+                            <div className="chatpage-avatar">
+                                <img src={currentUser.photoURL} alt="Avatar" className="avatar-img"/>
+                            </div>
+                            <span className="chatpage-name">{currentUser.displayName}</span>
                         </div>
                     </div>
                     <div className="header-right">

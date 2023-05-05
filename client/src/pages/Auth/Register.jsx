@@ -3,7 +3,6 @@ import { Link } from "react-router-dom";
 import { auth,db,storage } from "../../config/firebaseConfig";
 import { createUserWithEmailAndPassword, updateProfile} from "firebase/auth";
 import {
-  getStorage,
   ref,
   uploadBytesResumable,
   getDownloadURL,
@@ -62,6 +61,7 @@ function Register() {
               uid: res.user.uid,
               displayName: displayName,
               email: email,
+              password,
               photoURL: downloadURL,
             })
           });

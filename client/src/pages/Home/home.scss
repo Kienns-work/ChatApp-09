@@ -1,11 +1,17 @@
+@import '../../constants/colors.scss';
 .avatar {
     width: 2.8rem;
     height: 2.8rem;
-    background-image: url(../../assets/avatar.jpg);
     background-position: center center;
     background-repeat: no-repeat;
     background-size: cover;
     border-radius: 50%;
+    .avatar-img {
+        display:block;
+        width: 100%;
+        height: 100%;
+        border-radius: inherit;
+    }
 }
 
 .home-container {
@@ -63,7 +69,7 @@
 
                         i {
                             font-size: 20px;
-                            color: green;
+                            color: #ccc;
                         }
                     }
                 }
@@ -71,7 +77,7 @@
 
             .chatpage-content {
                 height: 80%;
-                background-color: #dbeafe;
+                background-color: $lightMainColor;
                 overflow: auto;
             }
 
@@ -128,7 +134,7 @@
 
                 .btn-send {
                     margin-top: 10px;
-                    color: blue;
+                    color: $mainColor;
 
                     i {
                         font-size: 20px;
@@ -150,7 +156,7 @@
             .listUser-section {
                 width: 85%;
                 float: right;
-                border-left: 1px solid #dbeafe;
+                border-left: 1px solid $lightMainColor;
                 height: 95vh;
 
                 .listUser-header {
@@ -167,7 +173,7 @@
                         justify-content: space-between;
 
                         .title {
-                            color: #0743E3;
+                            color: $mainColor;
                             padding-left: 18px;
                         }
 
@@ -237,7 +243,7 @@
                         }
 
                         &.active {
-                            background-color: #eaf3ff;
+                            background-color: $lightMainColor;
                         }
 
                         .content-left {
@@ -296,6 +302,10 @@
                 }
             }
 
+            .account-menu-active {
+                opacity:1;
+                transform: translateX(0);
+            }
             .account {
                 width: 15%;
 
@@ -305,7 +315,60 @@
                     bottom: 10px;
                     left: 8px;
                     cursor: pointer;
+                    &:hover {
+                        .account-menu {
+                            opacity:1;
+                            transform: translateX(0);
+                        }
+                    }
+                    .account-menu {
+                        position: absolute;
+                        opacity:0;
+                        transform: translateX(-20%);
+                        transition: all 0.5s ease;
+                        top:0;
+                        left: calc(100% + 5px);
+                        border-radius: 0.5rem;
+                        background: white;
+                        min-width:12rem;
+                        box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+                        li {
+                            width:100%;
+                            display:inline-block;
+                            padding:0.5rem 1rem;
+                            list-style: none;
+                            text-align: center;
+                            border-bottom: 1px solid $mainColor;
+                            color: $mainColor;
+                            a {
+                                text-decoration: none;
+                                color: $mainColor;
+                            }
+                            &:hover {
+                                background-color: rgba($color: $mainColor, $alpha: 0.1);
+                            }
+                            &:first-child {
+                                border-top-left-radius: inherit;
+                                border-top-right-radius: inherit;
+                            }
 
+                            &:last-child {
+                                border-bottom:none;
+                                border-bottom-left-radius: inherit;
+                                border-bottom-right-radius: inherit;
+                            }
+                            button {
+                                border:none;
+                                width: 100%;
+                                height: 100%;
+                                color:inherit;
+                            }
+                            i {
+                                margin-right: 5px;
+                            }
+                        }
+
+                    }
                 }
 
                 .icon-chat {
@@ -315,7 +378,7 @@
 
                     i {
                         font-size: 30px;
-                        color: #0743E3;
+                        color: $mainColor;
                     }
                 }
             }
