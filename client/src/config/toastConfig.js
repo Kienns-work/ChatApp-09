@@ -15,4 +15,15 @@ const errorToast =  message => {
     });
 }
 
-export {successToast, errorToast}
+const registerHandling = new Promise(resolve => setTimeout(resolve, 3000));
+const promiseToast = () => {
+    toast.promise(
+        registerHandling,
+        {
+          pending: 'Xin chờ trong giây lát ...',
+          success: 'Đã thêm tài khoản thành công.',
+          error: `Có lỗi xảy ra`
+        }
+    )
+}
+export {successToast, errorToast,promiseToast }
