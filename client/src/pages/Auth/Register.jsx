@@ -7,12 +7,17 @@ import {
   uploadBytesResumable,
   getDownloadURL,
 } from "firebase/storage";
-
+import { useNavigate } from "react-router-dom";
 import {doc, setDoc} from 'firebase/firestore';
+import LoadingOverlay from 'react-loading-overlay';
+import { successToast } from "../../config/toastConfig";
 
 function Register() {
   const [fileChosen, setFileChosen] = useState("No image chosen");
   const [imageData, setImageData] = useState("");
+  const [textState, setTextState] = useState("Đang tạo tài khoản ...");
+  const [isLoading, setIsLoading] = useState(false);
+  const navigate = useNavigate();
 
   const handleFileChosen = (e) => {
     const file = e.target.files[0];
@@ -26,6 +31,7 @@ function Register() {
 
   const handleOnSubmit = async (e) => {
     e.preventDefault();
+    setIsLoading(true);
     const displayName = e.target[0].value;
     const email = e.target[1].value;
     const password = e.target[2].value;
@@ -34,7 +40,7 @@ function Register() {
     try {
       console.log(email);
       const res = await createUserWithEmailAndPassword(auth, email, password).then((res) => {
-        console.log('Rẽ vào nhánh đúng của createUserwithEmail');
+        setTextState("Đang tạo khởi tạo kết nối ...");
         return res;
       }).catch((err) => {
         console.log("rẽ vào nhánh sai của createUserwithEmail");
@@ -49,6 +55,7 @@ function Register() {
           console.log(error);
         },
         () => {
+          setTextState("Đang lưu trữ Avatar ...")
           console.log("Chỗ này chạy vào phần đúng của uploadTask");
           getDownloadURL(uploadTask.snapshot.ref).then(async (downloadURL) => {
             console.log("Con của phần đúng uploadTask ");
@@ -57,24 +64,41 @@ function Register() {
                 displayName,
                 photoURL: downloadURL,
             });
+            setTextState("Chuẩn bị hoàn thành...")
             await setDoc(doc(db,"users",res.user.uid),{
               uid: res.user.uid,
               displayName: displayName,
               email: email,
               password,
               photoURL: downloadURL,
-            })
+            });
+            setIsLoading(false);
+            successToast("Tạo tài khoản thành công");
+            navigate("/login");
           });
         }
       );
     } catch (err) {
       console.log("Rẽ vào nhánh sai");
     }
+
   };
 
 
   return (
-    <section className="container forms">
+    
+    <LoadingOverlay
+    spinner
+    text={textState}
+      active= {isLoading}
+      styles={{
+        overlay: (base) => ({
+          ...base,
+          background: 'rgba(0, 0, 0,0.4)'
+        })
+      }}>
+      
+      <section className="container forms">
       <div className="form signup">
         <div className="form-content">
           <header>Signup</header>
@@ -136,6 +160,7 @@ function Register() {
         </div>
       </div>
     </section>
+    </LoadingOverlay>
   );
 }
 
