@@ -13,10 +13,10 @@ const ListUsesr = () => {
 
   const handleSignOut = () => {
     signOut(auth).then(() => {
-        successToast("Đăng xuất thành công !");
-      }).catch((error) => {
-        errorToast(error);
-      });
+      successToast("Đăng xuất thành công !");
+    }).catch((error) => {
+      errorToast(error);
+    });
   }
   return (
     <>
@@ -39,10 +39,10 @@ const ListUsesr = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/login">
-                    <i className="fa-solid fa-user"></i>
-                    Update Account
-                    </Link>
+                <Link to="/account">
+                  <i className="fa-solid fa-user"></i>
+                  Update Account
+                </Link>
               </li>
             </ul>
           </div>

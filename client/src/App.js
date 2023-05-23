@@ -5,6 +5,7 @@ import HomePage from "./pages/HomePage";
 import { useContext } from "react";
 import { AuthContext } from "./context/AuthContext";
 import Register from "./pages/Auth/Register";
+import Account from "./pages/Home/Account";
 
 function App() {
 
@@ -22,6 +23,7 @@ function App() {
           <Route index element={<CheckUserExist><HomePage /></CheckUserExist>} />
           <Route path="login" element={<LoginPage />} />
           <Route path="register" element={<Register />}></Route>
+          <Route path="account" element={<Account />} />
         </Route>
       </Routes>
     </BrowserRouter>

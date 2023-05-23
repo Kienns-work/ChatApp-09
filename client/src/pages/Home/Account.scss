@@ -1,0 +1,182 @@
+@import '../../constants/colors.scss';
+
+
+.account-section {
+    background-color: #e0e0e0;
+    height: 100vh;
+
+    .account-form {
+        .form-row {
+            display: flex;
+            flex-direction: row;
+            gap: 50px;
+            font-size: 1.1rem;
+            padding: 8px 0;
+
+            .form-col {
+                display: flex;
+                flex-direction: column;
+                min-width: 23rem;
+
+                .form-input {
+                    margin-top: 5px;
+                    height: 2.1rem;
+                    outline: none;
+                    border: 1px solid #dbdbdb;
+                    width: 100%;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                }
+
+                .form-select {
+                    margin-top: 5px;
+                    height: 2.1rem;
+                    outline: none;
+                    border: 1px solid #dbdbdb;
+                    width: 100%;
+                    padding: 5px 10px;
+                    font-size: 1rem;
+                    border-radius: 5px;
+                }
+            }
+        }
+
+
+        .form-col {
+            display: flex;
+            flex-direction: column;
+
+            .form-input {
+                margin-top: 5px;
+                padding: 5px 10px;
+                height: 2rem;
+                outline: none;
+                border: 1px solid #dbdbdb;
+                width: 100%;
+                border-radius: 5px;
+            }
+        }
+
+        a {
+            text-decoration: none;
+            color: #a1a1a1;
+            cursor: pointer;
+        }
+
+
+    }
+
+    .account__content {
+        margin: 20px 0;
+        padding: 30px 0;
+        height: 95vh;
+        box-shadow: 2px 5px 5px #ccc;
+        position: relative;
+        top: 50%;
+        transform: translateY(-50%);
+        background-color: $lightText;
+        border-radius: 10px;
+
+        .account__header {
+            .title {
+                text-align: center;
+                font-size: 1.6rem;
+                color: #333333;
+            }
+
+            .account__header--avatar {
+                padding-top: 20px;
+                display: flex;
+                justify-content: center;
+                position: relative;
+
+                img {
+                    width: 150px;
+                    height: 150px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                    border: 1px solid #dbdbdb;
+
+                    &alt {
+                        text-align: center;
+                        color: red;
+                    }
+                }
+
+                .chane-avatar {
+                    cursor: pointer;
+                    position: absolute;
+                    width: 150px;
+                    height: 150px;
+                    border-radius: 50%;
+                    display: flex;
+                    bottom: 0;
+                    justify-content: center;
+                    align-items: center;
+
+                    &:hover {
+                        i {
+                            display: block;
+                        }
+
+                        background-color: rgba(0, 0, 0, 0.5);
+                    }
+
+                    i {
+                        display: none;
+                        color: $lightText;
+                        font-size: 1.5rem;
+                    }
+                }
+            }
+
+            .account__header--email {
+                margin-top: 20px;
+                text-align: center;
+
+                p {
+                    font-size: 1rem;
+                    color: #a1a1a1;
+                    font-weight: 600;
+                    cursor: default;
+                }
+            }
+        }
+
+        .account__body {
+            // background-color: $lightText;
+            display: flex;
+            justify-content: center;
+            padding-top: 20px;
+
+            @extend .account-form;
+        }
+    }
+
+    .btn {
+        display: flex;
+        justify-content: center;
+        margin-top: 30px;
+        gap: 20px;
+
+        button {
+            font-size: 1rem;
+            padding: 10px 15px;
+            outline: none;
+            border: none;
+            background-color: $mainColor;
+            color: $lightText;
+            cursor: pointer;
+            font-weight: 600;
+            border-radius: 5px;
+
+            &:hover {
+                opacity: 0.6;
+            }
+
+            &.no-cursor {
+                cursor: no-drop;
+            }
+        }
+    }
+}
